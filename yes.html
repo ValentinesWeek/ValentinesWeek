@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>I knew you would say Yes!!</title>
+        <link rel="stylesheet" href="rosestyle.css">
+        <link rel="stylesheet" href="resources/Heart/heartstyle.css">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+        <script src="indexscript.js" defer></script>
+        <script src="resources/Heart/heartscript.js" ></script>
+        <meta charset="UTF-8">
+    </head>
+
+    <body>
+        
+        <div class="container">
+            
+            <div id="heading"> I knew you would say Haha </div>
+
+            <div id="launchBtn">Happy rose day dear!! (click me)</div>
+            <div id="hrd">Thank youu 💓</div>
+
+
+            <canvas id="heart" width="100%" height="70%"></canvas>
+
+
+            <script src="script.js"></script>
+
+
+        </div>
+
+        <script>
+            const launchBtn = document.getElementById("launchBtn");
+            const hrdBtn = document.getElementById("hrd");
+
+            launchBtn.addEventListener("click", () => {
+                let explosionSize = 500; // EVEN MORE CHAOS
+                for (let i = 0; i < explosionSize; i++) { 
+                    createEmoji();
+                }
+            });
+
+            function showElement() {
+                hrdBtn.style.display = "block"; // First, make it visible
+                setTimeout(() => { 
+                    hrdBtn.style.opacity = "1"; // Then, fade it in
+                }, 10); // Small delay to let display change take effect
+            }
+
+            function createEmoji() {
+                const emoji = document.createElement("div");
+                emoji.classList.add("emoji");
+
+                // Massive variety of love emojis (hearts + flowers)
+                const emojis = ["❤️", "🌹", "💕", "💖", "💘", "💞", "💗", "🌸", "💐",  "🌷",  "🌺"];
+                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)]; 
+
+                document.body.appendChild(emoji);
+
+                // Random start position around the button
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                
+                emoji.style.left = `${x}px`;
+                emoji.style.top = `${y}px`;
+
+                // Make them move randomly FOREVER
+                animateEmoji(emoji);
+            }
+
+            function animateEmoji(emoji) {
+                const duration = Math.random() * 10 + 5; // Random animation duration (5-15s)
+                const angle = Math.random() * 360; // Random angle for movement
+                const distance = Math.random() * 300 + 100; // Random movement distance
+
+                emoji.animate([
+                    { transform: `translate(0, 0) rotate(0deg)`, opacity: 1 },
+                    { transform: `translate(${distance * Math.cos(angle)}px, ${distance * Math.sin(angle)}px) rotate(360deg)`, opacity: 0.8 },
+                    { transform: `translate(${-distance * Math.cos(angle)}px, ${-distance * Math.sin(angle)}px) rotate(-360deg)`, opacity: 1 }
+                ], {
+                    duration: duration * 1000,
+                    iterations: Infinity, // NEVER STOPS
+                    easing: "ease-in-out"
+                });
+
+                showElement();
+            }
+            
+            hrdBtn.addEventListener("click", function(){
+                hrdBtn.style.transition = "transform 0.3s ease-out, opacity 0.3s ease-out";
+                hrdBtn.style.transform = "scale(10)";
+                hrdBtn.style.opacity = "0"; 
+                setTimeout(() => {
+                    window.location.href = "hrd.html"; // Change this to your URL
+                }, 500); 
+            })
+            
+        </script>
+    </body>
+
+</html>
